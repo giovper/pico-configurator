@@ -20,6 +20,17 @@ def is_raspberry_pi(letter):
 def does_device_exists(letter):
     return os.path.exists(f"{letter}:\\")
 
+def get_uf2_file(name):
+    if name == "Circuit Python":
+        return "circuit_python.uf2"
+    elif name == "Micro Python":
+        return "micropython.uf2"
+    else:
+        print("Error: UF2 file not found. Now using Circuit Python; please check the var uf2_name")
+        return "circuit_python.uf2"
+    
+uf2_name = "Circuit Python"
+
 #Welcome
 
 print("Welcome to the raspberry configurator script, please choose a program: \n")
@@ -64,9 +75,9 @@ os.system(f"copy src\\format.uf2 {letter}:\ ")
 
 sleep(6)
 
-print("Flashing circuit python...")
+print("Flashing circuit python...")        
 
-os.system(f"copy src\circuit_python.uf2 {letter}:\ ")
+os.system(f"copy src\{get_uf2_file(uf2_name)} {letter}:\ ")
 
 sleep(6)
 
